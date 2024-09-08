@@ -1,41 +1,29 @@
 "use client";
-
-import { Edit2Icon, Trash2 } from "lucide-react";
 import { ToDoList } from "@/types/toDoList";
-import { useDeleteTask } from "@/hooks/useDeleteTask";
 import { useTasks } from "@/hooks/useTasks";
+import TaskDetails from "./TaskDetails";
+import { Loader } from "lucide-react";
 
-export default function List() {
+interface ListProps {
+  isCompletedFilter: boolean;
+}
 
- const {isDeleting,deleteTask} = useDeleteTask();
+export default function List({ isCompletedFilter }: ListProps) {
 const {todoList,isLoading} = useTasks();
  
   console.log(todoList);
 
-  if (isLoading) return <p>Loading...</p>;
-  const sortedList = todoList.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
-  
-  console.log("sortedList>>>",sortedList);
+  if (isLoading) return <p className="text-center"><Loader size={48} strokeWidth={2.25} className="text-center my-5" /></p>;
+  // const sortedList = todoList.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
+  const filteredList = todoList
+  .filter((task: ToDoList) => task.isCompleted === isCompletedFilter)
+  .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  console.log("filteredList>>>",filteredList);
   return (
-    <div>
-      <p>You have {todoList.length} task(s)</p>
-      {sortedList.length > 0 ? (
-        sortedList.map((list: ToDoList) => (
-          <div className="list-card checkbox-wrap" key={list.id}>
-            <input type="checkbox" checked={list.isCompleted} />
-            <label className={`${list.isCompleted ? "text-muted" : ""} `}>
-            <h5>{list.title}</h5>
-            <p>{list.description}</p>
-            <div className="d-flex flex-column list-icons pr-2">
-              <button className="btn btn-danger m-1" disabled={isDeleting} onClick={()=>deleteTask(list.id)}>
-                <Trash2 size={16} />
-              </button>
-              <button className="btn btn-success m-1">
-                <Edit2Icon size={16} />
-              </button>
-            </div>
-          </label>
-            </div>
+    <div className="mt-4">
+      {filteredList.length > 0 ? (
+        filteredList.map((list: ToDoList) => (
+         <TaskDetails list={list} key={list.id} />
         ))
       ) : (
         <p className="text-center">You don&apos;t have tasks, start adding some</p>

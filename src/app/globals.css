@@ -54,7 +54,14 @@ body{
    height: 60px;
    font-size: 1.125rem !important;
 }
-
+.btn-danger{
+ background-color: #bb2d3b57 !important;
+ border-color: #bb2d3b57 !important;
+}
+.btn-success{
+ background-color: #19875487 !important;
+ border-color: #19875487 !important;
+}
 .w-100 {
   width: 100% !important;
 }

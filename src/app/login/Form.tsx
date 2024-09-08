@@ -79,8 +79,6 @@ const [isPending, stratTransition] = useTransition();
       <div className="col-lg-6 d-none d-lg-block bg-cover">
       <Image
   src={coverImage}
-  width={900}
-  height={80}
   alt="login image"
   className="bg-cover"
 />

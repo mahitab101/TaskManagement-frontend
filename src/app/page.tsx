@@ -6,6 +6,7 @@ import { authOptions } from "@/lib/authOptions ";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import CompletedTasks from "@/components/ToDoList/CompletedTasks";
+import TaskSList from "@/components/ToDoList/TaskSList";
 
 export const metadata:Metadata={
   title:'Home page'
@@ -21,9 +22,9 @@ export default async function Home() {
       <div className="row">
         <Search />
         <CreateTask />
-        
-        <div className="col-6"><List /></div>
-        <div className="col-6"><CompletedTasks /></div>
+        <TaskSList/>
+        {/* <div className="col-6"><List /></div>
+        <div className="col-6"><CompletedTasks /></div> */}
       </div>
   );
 }
