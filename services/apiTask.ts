@@ -8,7 +8,7 @@ export async function DeleteTask(id:number,token:string) {
             Authorization: `Bearer ${token}`,
           };
         
-          const response = await fetch(`http://localhost:5227/api/ToDo/${id}`, {
+          const response = await fetch(`http://todolistapi.runasp.net/api/ToDo/${id}`, {
             method: "DELETE",
             headers: headersList,
           });
@@ -24,7 +24,7 @@ export async function createNewTask(obj:ToDoList,token:string) {
             "Content-Type": "application/json"
         };
     
-        const response = await fetch(`http://localhost:5227/api/ToDo`, {
+        const response = await fetch(`http://todolistapi.runasp.net/api/ToDo`, {
             method: "POST",
             headers: headersList,
             body: JSON.stringify(obj),
@@ -49,7 +49,7 @@ export async function createNewTask(obj:ToDoList,token:string) {
             Authorization: `Bearer ${token}`,
           };
       
-          const response = await fetch(`http://localhost:5227/api/ToDo/${userId}`, {
+          const response = await fetch(`http://todolistapi.runasp.net/api/ToDo/${userId}`, {
             method: "GET",
             headers: headersList,
           });

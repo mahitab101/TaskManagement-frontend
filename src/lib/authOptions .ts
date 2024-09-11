@@ -15,7 +15,7 @@ export const authOptions : NextAuthOptions={
           },
             async authorize(credentials, req) {
               try {
-                const response = await fetch(`http://localhost:5227/api/Account/login`, {
+                const response = await fetch(`http://todolistapi.runasp.net/api/Account/login`, {
                   method: 'POST',
                   headers: {
                     "Accept": "*/*",

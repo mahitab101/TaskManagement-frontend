@@ -4,7 +4,7 @@ export async function POST(request: Request) {
     try {
         const { username,email, password } = await request.json();
         console.log("request",{username,email , password});
-        const response = await fetch(`http://localhost:5227/api/Account/register`, {
+        const response = await fetch(`http://todolistapi.runasp.net/api/Account/register`, {
             method: 'POST',
             headers: {
               "Accept": "*/*",
