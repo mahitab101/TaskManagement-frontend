@@ -1,6 +1,8 @@
 import z from 'zod'
 
 const requiredString = z.string().trim().min(1,"Required");
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 export const signUpSchema = z.object({
     email : requiredString.email("Invalid Email Address"),
@@ -23,11 +25,10 @@ export type LoginValues = z.infer<typeof loginSchema>;
 export const createTaskSchema= z.object({
     title:requiredString,
     description:requiredString,
-    deadline:z.string()
-    //.datetime()
-    // .refine((date) => {new Date().toString() !== 'invalid date',{message:"valid date is reqired"}}).transform((date)=>new Date(date))
-    })
+    deadline:z.coerce.date().refine(
+        (date) => date >= today,
+        { message: "Deadline must be today or in the future" }
+      )
+ })
     
-
-
 export type createTaskValues = z.infer<typeof createTaskSchema>;
